@@ -1,0 +1,36 @@
+{
+  "name": "my_page_backend",
+  "version": "1.0.0",
+  "description": "my_page_backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinan159/my_page_backend.git"
+  },
+  "author": "jwkim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jinan159/my_page_backend/issues"
+  },
+  "homepage": "https://github.com/jinan159/my_page_backend#readme",
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "morgan": "^1.9.1",
+    "mybatis-mapper": "^0.6.5",
+    "mysql": "^2.17.1",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "swagger-jsdoc": "^7.0.0-rc.6",
+    "swagger-ui-express": "^4.1.6"
+  }
+}
