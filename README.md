@@ -12,12 +12,12 @@ docker build --tag my_node:x.x.x .
 docker run -d -it \
        -p 3000:3000 \
        -v /Users/jwkim/DockerShare/my_page_server/:/app \
-       --name dev my_node:x.x.x
+       --name my_page_server my_page_server:x.x.x
 ```
 
 #### 2. 컨테이너 접속
 ```
-docker exec -it dev /bin/bash
+docker exec -it my_page_server /bin/bash
 ```
 
 #### 3. 필요한 의존성 설치
