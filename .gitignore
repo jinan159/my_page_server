@@ -4,3 +4,7 @@ package-lock.json
 
 # mac filesystem stuff
 .Ds_Store
+
+# configfile
+config/env/development.js
+config/env/production.js

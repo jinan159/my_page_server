@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Post">
+
+  <select id="findAllPost">
+    SELECT id
+         , title
+         , writer
+         , content
+         , start_date
+         , end_date
+         , write_datetime
+         , modified_datetime 
+      FROM post
+      <if test="sort == 'asc'">
+     ORDER BY start_date ASC
+      </if>
+      <if test="sort == 'desc'">
+     ORDER BY start_date DESC
+      </if>
+  </select>
+
+</mapper>
