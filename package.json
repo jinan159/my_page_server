@@ -4,8 +4,8 @@
   "description": "my_page_backend",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,8 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
     "swagger-jsdoc": "^7.0.0-rc.6",
     "swagger-ui-express": "^4.1.6"
   }
