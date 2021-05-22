@@ -18,7 +18,7 @@ module.exports = {
      * @param {String} message 
      */
     devConsoleLog : (...options) => {
-        if (process.env.NODE_ENV == 'development') {
+        if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'dev_remote') {
             var now = util.dateUtils.dateFormatString("YYYY-MM-DD HH:MI:SS", new Date());
             var message = '';
             for(i in options) {

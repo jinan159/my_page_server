@@ -1,7 +1,8 @@
-process.env.NODE_ENV = (process.env.NODE_ENV && (process.env.NODE_ENV).trim().toLowerCase() == 'production') ? 'production' : 'development';
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const NODE_ENV = process.env.NODE_ENV;
+if (NODE_ENV !== 'prod' && NODE_ENV !== 'dev' && NODE_ENV !== 'dev_remote') process.env.NODE_ENV = 'dev';
 
 /**[START] 모듈 선언*/
 const cors = require('cors');
