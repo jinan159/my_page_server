@@ -29,5 +29,17 @@ npm install
 ```
 npm start
 ```
+
+#### 5. 프로젝트 환경 변경
+```
+* 개발(집)
+export NODE_ENV=DEV
+
+* 개발(원격지)
+export NODE_ENV=DEV_REMOTE
+
+* 운영
+export NODE_ENV=PROD
+```
 ---
 
