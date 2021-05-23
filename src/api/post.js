@@ -1,7 +1,7 @@
 const express = require('express');
 const Joi = require('joi');
 const postService = require('../services/postService');
-const logger = require('../../utils/logger');
+const WrongRequestError = require('../../utils/errors/WrongRequestError');
 
 const app = express();
 
@@ -15,13 +15,13 @@ app.get('/', function(req, res) {
         count : Joi.number().integer().greater(-1)
     });
 
-    // 스키마 테스트
+    // 요청 파라미터 validation
     const req_validation = schema.validate(req.query);
 
-    if (req_validation.error) {
-        // 오류 로깅
-        logger.devErrorConsoleLog(req_validation.error.details[0].message);
-        res.json(req_validation.error);
+    // validation 오류
+    if (req_validation.error) {        
+        // 잘못된 요청
+        throw new WrongRequestError(400, req_validation.error.details[0].message);
     } else {
         // 서비스 호출
         postService.findAllPost(req.query, (results) => {
