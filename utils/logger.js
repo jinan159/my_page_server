@@ -1,6 +1,6 @@
 const util = require('./util');
 
-module.exports = {
+const logger = {
     /**
      * console에 로깅 (현재시간> message)
      * @param {String} message 
@@ -27,5 +27,14 @@ module.exports = {
 
             console.log(`${now}> ${message}`);
         }
+    },
+    /**
+     * DEV || REMOTE_DEV 일때만 console에 로깅 (현재시간> message)
+     * @param {String} message 
+     */
+     devErrorConsoleLog : (...options) => {
+        logger.devConsoleLog('error ', ...options);
     }
 }
+
+module.exports = logger;
