@@ -6,16 +6,14 @@ if (NODE_ENV !== 'prod' && NODE_ENV !== 'dev' && NODE_ENV !== 'dev_remote') proc
 
 // 모듈 선언
 const cors = require('cors');
-const bodyParser = require('body-parser');
 
 // 모듈 적용
 app.use(cors());                                    // CORS 허용 설정
 app.use(express.json());                            // Request 데이터 json으로 변환
 // app.use(express.urlencoded({extends: true}));    // Request 데이터 json으로 변환
-app.use(bodyParser());
 
 // router 선언
-const post = require('./src/api/post/post.js'); 
+const post = require('./src/api/post.js'); 
 
 // router 적용
 app.use('/api/post', post);

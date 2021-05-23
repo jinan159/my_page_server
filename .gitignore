@@ -8,3 +8,6 @@ package-lock.json
 # configfile
 config/env/development.js
 config/env/production.js
+
+# workspace
+.vscode
