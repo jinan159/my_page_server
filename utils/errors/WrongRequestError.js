@@ -4,7 +4,7 @@
 class WrongRequestError extends Error {
     /**
      * 
-     * @param {Number} code 오류코드(default:400)
+     * @param {Number} code 오류코드(recommand:400)
      * @param {String} message 오류 메세지
      * @param  {...any} params 
      */
