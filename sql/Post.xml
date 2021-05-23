@@ -12,11 +12,14 @@
          , write_datetime
          , modified_datetime 
       FROM post
-      <if test="sort == 'asc'">
+      <if test="sort == 'ASC'">
      ORDER BY start_date ASC
       </if>
-      <if test="sort == 'desc'">
+      <if test="sort == 'DESC'">
      ORDER BY start_date DESC
+      </if>
+      <if test="start != null AND count != null">
+     LIMIT #{start}, #{count} 
       </if>
   </select>
 

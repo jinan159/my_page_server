@@ -1,31 +1,56 @@
-const pool = require('../config/db_connection.js');
+const pool = require('../config/db_connection');
 const mapper = require('mybatis-mapper');
 const path = require('path');
-const mapperPath = path.join(__dirname, '../sql/Post.xml');
 const format = { language: 'sql', indent: ' ' };
+const logger = require('../utils/logger');
+
+const mapperPath = path.join(__dirname, '../sql/Post.xml');
+
 mapper.createMapper([mapperPath]);
 
-let PostDAO = {
-    findAllPost : function(sort, callback) {
-        let query_result = null;
+const PostDAO = {
+    /**
+     * 글 목록 조회
+     * @param {String} sort 정렬방식 (ASC, DESC)
+     * @param {String} start 페이징 시작 인덱스
+     * @param {String} count 페이징 개수
+     * @param {Function} callback 
+     */
+    findAllPost : (sort, start, count, callback) => {
+        let query_params = {};
 
+        // 정렬 파라미터 있을경우, 쿼리 파라미터에 삽입
         if (sort) {
-            var params = { sort_indicator : sort };
+            sort = sort.toUpperCase();
+            query_params.sort_indicator = sort;
         }
 
-        let query = mapper.getStatement('Post', 'findAllPost', params, format);
+        // 페이징 파라미터 있을경우, 쿼리 파라미터에 삽입
+        if (start && count) {
+            query_params.start = start;
+            query_params.count = count;
+        }
 
+        // 조회 쿼리 로드
+        let query = mapper.getStatement('Post', 'findAllPost', query_params, format);
+
+        // 커넥션풀에서 DB커넥션 가져옴
         pool.getConnection( (error, connection) => {
             if (error) throw error;
 
-            connection.query(query, function(error, results, fields) {
+            logger.devConsoleLog(query); // [개발] 쿼리 콘솔에 출력
+
+            // 쿼리 실행
+            connection.query(query, (error, results, fields) => {
                 if (error) throw error;
                 
-                return callback(results);
+                // 조회 결과 콜백함수에 리턴
+                callback(results);
             });
         });
-
-        return query_result;
+    },
+    insertPost : (title, writer, content, start_date, end_date) => {
+        
     }
 }
 
