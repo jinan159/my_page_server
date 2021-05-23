@@ -20,17 +20,22 @@ docker run -d -it \
 docker exec -it my_page_server /bin/bash
 ```
 
-#### 3. 필요한 의존성 설치
+#### 3. 컨테이너 커밋
+```
+docker commit my_page_server tkakcy159/my_page_server:x.x.x
+```
+
+#### 4. 필요한 의존성 설치
 ```
 npm install
 ```
 
-#### 4. 프로젝트 실행
+#### 5. 프로젝트 실행
 ```
 npm start
 ```
 
-#### 5. 프로젝트 환경 변경
+#### 6. 프로젝트 환경 변경
 ```
 * 개발(집)
 export NODE_ENV=DEV
