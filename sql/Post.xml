@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Post">
 
+  <sql id="ORDER_BY">
+    <choose>
+      <when test="sort == 'ASC'">
+        ORDER BY ${col} ASC
+      </when>
+      <if test="sort == 'DESC'">
+        ORDER BY ${col} DESC
+      </if>
+    </choose>
+  </sql>
+
   <select id="findAllPost">
     SELECT id
          , title
@@ -10,16 +21,13 @@
          , start_date
          , end_date
          , write_datetime
-         , modified_datetime 
+         , modified_datetime
       FROM post
-      <if test="sort == 'ASC'">
-     ORDER BY start_date ASC
-      </if>
-      <if test="sort == 'DESC'">
-     ORDER BY start_date DESC
-      </if>
-      <if test="start != null AND count != null">
-     LIMIT #{start}, #{count} 
+      <include refid="ORDER_BY">
+        <property name="col" value="start_date"/>
+      </include>
+      <if test="start > -1 AND count > -1">
+        LIMIT ${start}, ${count}
       </if>
   </select>
 

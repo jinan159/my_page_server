@@ -3,6 +3,7 @@ const mapper = require('mybatis-mapper');
 const path = require('path');
 const format = { language: 'sql', indent: ' ' };
 const logger = require('../utils/logger');
+const { devConsoleLog } = require('../utils/logger');
 
 const mapperPath = path.join(__dirname, '../sql/Post.xml');
 
@@ -12,8 +13,8 @@ const PostDAO = {
     /**
      * 글 목록 조회
      * @param {String} sort 정렬방식 (ASC, DESC)
-     * @param {String} start 페이징 시작 인덱스
-     * @param {String} count 페이징 개수
+     * @param {Number} start 페이징 시작 인덱스
+     * @param {Number} count 페이징 개수
      * @param {Function} callback 
      */
     findAllPost : (sort, start, count, callback) => {
@@ -22,11 +23,11 @@ const PostDAO = {
         // 정렬 파라미터 있을경우, 쿼리 파라미터에 삽입
         if (sort) {
             sort = sort.toUpperCase();
-            query_params.sort_indicator = sort;
+            query_params.sort = sort;
         }
 
         // 페이징 파라미터 있을경우, 쿼리 파라미터에 삽입
-        if (start && count) {
+        if (start > -1 && count > -1) {
             query_params.start = start;
             query_params.count = count;
         }
