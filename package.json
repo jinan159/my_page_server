@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "jest"
+    "test": "jest --no-cache"
   },
   "repository": {
     "type": "git",
@@ -18,21 +18,16 @@
   },
   "homepage": "https://github.com/jinan159/my_page_backend#readme",
   "dependencies": {
-    "app-root-path": "^3.0.0",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
-    "morgan": "^1.9.1",
     "mybatis-mapper": "^0.6.5",
     "mysql": "^2.17.1",
-    "path": "^0.12.7",
-    "winston": "^3.2.1"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "jest": "^26.6.3",
-    "nodemon": "^2.0.7",
-    "swagger-jsdoc": "^7.0.0-rc.6",
-    "swagger-ui-express": "^4.1.6"
+    "nodemon": "^2.0.7"
   }
 }
