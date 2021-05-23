@@ -8,7 +8,7 @@ const mapperPath = path.join(__dirname, '../../sql/Post.xml');
 
 mapper.createMapper([mapperPath]);
 
-const PostDAO = {
+const postModel = {
     /**
      * 글 목록 조회
      * @param {String} sort 정렬방식 (ASC, DESC)
@@ -49,9 +49,18 @@ const PostDAO = {
             });
         });
     },
-    insertPost : (title, writer, content, start_date, end_date) => {
+
+    // /**
+    //  * 글 등록
+    //  * @param {String} title 
+    //  * @param {String} writer 
+    //  * @param {String} content 
+    //  * @param {Date} start_date 
+    //  * @param {Date} end_date 
+    //  */
+    // insertPost : (title, writer, content, start_date, end_date) => {
         
-    }
+    // }
 }
 
-module.exports = PostDAO;
+module.exports = postModel;
