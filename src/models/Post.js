@@ -1,11 +1,10 @@
-const pool = require('../config/db_connection');
 const mapper = require('mybatis-mapper');
 const path = require('path');
-const format = { language: 'sql', indent: ' ' };
-const logger = require('../utils/logger');
-const { devConsoleLog } = require('../utils/logger');
+const pool = require('../../config/db_connection');
+const logger = require('../../utils/logger');
 
-const mapperPath = path.join(__dirname, '../sql/Post.xml');
+const format = { language: 'sql', indent: ' ' };
+const mapperPath = path.join(__dirname, '../../sql/Post.xml');
 
 mapper.createMapper([mapperPath]);
 

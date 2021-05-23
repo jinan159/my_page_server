@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const PostDAO = require('../models/Post');
-const logger = require('../utils/logger');
+const PostDAO = require('../../models/Post');
+const logger = require('../../../utils/logger');
 
 // 글 목록 조회
 app.get('/', function(req, res) {
