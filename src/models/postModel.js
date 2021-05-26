@@ -17,19 +17,15 @@ const postModel = {
      * @param {Function} callback 
      */
     findAllPost : (sort, start, count, callback) => {
-        let query_params = {};
+        // 쿼리 파라미터 생성
+        let query_params = {}
 
-        // 정렬 파라미터 있을경우, 쿼리 파라미터에 삽입
-        if (sort) {
-            sort = sort.toUpperCase();
-            query_params.sort = sort;
-        }
+        // 파라미터 삽입
+        if (sort) query_params.sort = sort;
+        if (start) query_params.start = start;
+        if (count) query_params.count = count;
 
-        // 페이징 파라미터 있을경우, 쿼리 파라미터에 삽입
-        if (start > -1 && count > -1) {
-            query_params.start = start;
-            query_params.count = count;
-        }
+        logger.devConsoleLog(JSON.stringify(query_params));
 
         // 조회 쿼리 로드
         let query = mapper.getStatement('Post', 'findAllPost', query_params, format);
