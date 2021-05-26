@@ -10,7 +10,7 @@ app.get('/', function(req, res) {
 
     // API 스키마 정의
     const schema = Joi.object({
-        sort : Joi.string().default('asc'),
+        sort : Joi.string().valid('asc', 'desc'),
         start : Joi.number().integer().greater(-1),
         count : Joi.number().integer().greater(-1)
     });
