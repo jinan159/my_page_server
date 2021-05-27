@@ -11,21 +11,10 @@ mapper.createMapper([mapperPath]);
 const postModel = {
     /**
      * 글 목록 조회
-     * @param {String} sort 정렬방식 (ASC, DESC)
-     * @param {Number} start 페이징 시작 인덱스
-     * @param {Number} count 페이징 개수
+     * @param {Object} query_params 쿼리 파라미터
      * @param {Function} callback 
      */
-    findAllPost : (sort, start, count, callback) => {
-        // 쿼리 파라미터 생성
-        let query_params = {}
-
-        // 파라미터 삽입
-        if (sort) query_params.sort = sort;
-        if (start) query_params.start = start;
-        if (count) query_params.count = count;
-
-        logger.devConsoleLog(JSON.stringify(query_params));
+    findAllPost : (query_params, callback) => {
 
         // 조회 쿼리 로드
         let query = mapper.getStatement('Post', 'findAllPost', query_params, format);

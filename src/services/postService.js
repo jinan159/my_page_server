@@ -1,15 +1,18 @@
 const postModel = require('../models/postModel');
+const logger = require('../../utils/logger');
 
 module.exports = {    
     /**
      * 글 목록 조회
-     * @param {Object} params       정렬 파라미터
+     * @param {Object} params       조회를 위한 파라미터들
      * @param {Function} callback 
      */
     findAllPost : (params, callback) => {
 
+        logger.devConsoleLog(JSON.stringify(query_params));
+
         // 전체 글 목록 조회
-        postModel.findAllPost(params.sort, params.start, params.count, (results)=>{
+        postModel.findAllPost(params, (results)=>{
             callback(results);
         });
     }
