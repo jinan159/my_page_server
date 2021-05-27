@@ -23,7 +23,7 @@ const postModel = {
         pool.getConnection( (error, connection) => {
             if (error) throw error;
 
-            logger.devConsoleLog(query); // [개발] 쿼리 콘솔에 출력
+            logger.devLog(query); // [개발] 쿼리 콘솔에 출력
 
             // 쿼리 실행
             connection.query(query, (error, results, fields) => {

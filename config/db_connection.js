@@ -7,7 +7,7 @@ const NODE_ENV = process.env.NODE_ENV;
 var pool = null;
 
 // 개발 로깅
-logger.consoleLog('db_connection(process.env.NODE_ENV) : ', process.env.NODE_ENV);
+logger.devLog('db_connection(process.env.NODE_ENV) : ', process.env.NODE_ENV);
 
 if (NODE_ENV === 'dev' || NODE_ENV === 'dev_remote') {
     // 원격 개발일 경우 host를 remote_host로 변경

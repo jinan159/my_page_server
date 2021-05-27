@@ -6,7 +6,7 @@ module.exports = (err, req, res, next) => {
         return res.status(err.code).json(err.message);
     }
 
-    logger.devErrorConsoleLog(err.stack);
+    logger.devError(err.stack);
 
     if (process.env.NODE_ENV !== 'dev' && process.env.NODE_ENV !== 'dev_remote') {
         return res.status(500).send(err.stack);

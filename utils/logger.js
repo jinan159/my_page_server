@@ -1,39 +1,70 @@
 const util = require('./utils');
+const LOG = '[LOG]';
+const ERR = '[ERROR]';
+const DEV = '[DEV]';
+
+/**
+ * 실제 로그를 남기는 함수
+ * @param  {...any} options 
+ */
+const writeLog = (...options) => {
+    let pre = '';
+    let now = util.dateUtils.dateFormatString("YYYY-MM-DD HH:MI:SS", new Date());
+    let message = '';
+    let isError = false;
+
+    // pre Text 여부에 따라 메세지 생성
+    for(i in options) {
+        switch (options[i]) {
+            case LOG: pre += LOG;                 break;
+            case ERR: pre += ERR; isError = true; break;
+            case DEV: pre += DEV;                 break;
+            default: message += options[i];       break;
+        }
+        
+    }
+
+    // 오류가 포함된 경우 error 로깅
+    if (isError) {
+        console.error(`${pre} ${now} > ${message}`);
+    } else {
+        console.log(`${pre} ${now} > ${message}`);
+    }
+}
 
 const logger = {
     /**
-     * console에 로깅 (현재시간> message)
-     * @param {String} message 
+     * 일반 로그 ([LOG] 현재시간> message)
+     * @param {any} message
      */
-    consoleLog : (...options) => {
-        var now = util.dateUtils.dateFormatString("YYYY-MM-DD HH:MI:SS", new Date());
-        var message = '';
-        for(i in options) {
-            message += options[i];
-        }
-        console.log(`${now}> ${message}`);
+    log : (...message) => {
+        writeLog(LOG, ...message);
     },
     /**
-     * DEV || REMOTE_DEV 일때만 console에 로깅 (현재시간> message)
-     * @param {String} message 
+     * 에러 로그 ([ERROR] 현재시간> message)
+     * @param {any} message 
      */
-    devConsoleLog : (...options) => {
+     error : (...message) => {
+        writeLog(ERR, ...message);
+    },
+    /**
+     * 개발 로그 ([DEV] 현재시간> message)
+     * @param {any} message 
+     */
+    devLog : (...message) => {
         if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'dev_remote') {
-            var now = util.dateUtils.dateFormatString("YYYY-MM-DD HH:MI:SS", new Date());
-            var message = '';
-            for(i in options) {
-                message += options[i];
-            }
-
-            console.log(`${now}> ${message}`);
+            writeLog(DEV, ...message);
         }
     },
     /**
-     * DEV || REMOTE_DEV 일때만 console에 로깅 (현재시간> message)
-     * @param {String} message 
+     * 개발 에러 로그 ([DEV][ERROR] 현재시간> message)
+     * @param {any} message 
      */
-     devErrorConsoleLog : (...options) => {
-        logger.devConsoleLog('error ', ...options);
+     devError : (...message) => {
+        if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'dev_remote') {
+            writeLog(DEV, ERR, ...message);
+        }
+        
     }
 }
 
