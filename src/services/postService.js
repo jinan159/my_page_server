@@ -9,7 +9,7 @@ module.exports = {
      */
     findAllPost : (params, callback) => {
 
-        logger.devLog(JSON.stringify(query_params));
+        logger.devLog(JSON.stringify(params));
 
         // 전체 글 목록 조회
         postModel.findAllPost(params, (results)=>{
