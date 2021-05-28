@@ -30,4 +30,30 @@ app.get('/', function(req, res) {
     }
 });
 
+app.post('/', function(req, res) {
+
+    const schema = Joi.object({
+        title       : Joi.string().max(50).required(),
+        writer      : Joi.string().max(50).required(),
+        content     : Joi.string(),
+        start_date  : Joi.date(),
+        end_date    : Joi.date(),
+    });
+
+    // 요청 파라미터 validation
+    const req_validation = schema.validate(req.body);
+
+    // validation 오류
+    if (req_validation.error) {        
+        // 잘못된 요청
+        throw new WrongRequestError(400, req_validation.error.details[0].message);
+    } else {
+        // 서비스 호출
+        postService.savePost(req.body, (results) => {
+            res.json(results);
+        });
+    }
+
+});
+
 module.exports = app;

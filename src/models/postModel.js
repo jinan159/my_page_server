@@ -35,17 +35,30 @@ const postModel = {
         });
     },
 
-    // /**
-    //  * 글 등록
-    //  * @param {String} title 
-    //  * @param {String} writer 
-    //  * @param {String} content 
-    //  * @param {Date} start_date 
-    //  * @param {Date} end_date 
-    //  */
-    // insertPost : (title, writer, content, start_date, end_date) => {
-        
-    // }
+    /**
+     * 글 등록
+     * @param {Object} query_params 
+     * @param {Function} callback 
+     */
+    savePost : (query_params, callback) => {
+        // 등록 쿼리 로드
+        let query = mapper.getStatement('Post', 'savePost', query_params, format);
+
+        // 커넥션풀에서 DB커넥션 가져옴
+        pool.getConnection( (error, connection) => {
+            if (error) throw error;
+
+            logger.devLog(query); // [개발] 쿼리 콘솔에 출력
+
+            // 쿼리 실행
+            connection.query(query, (error, results, fields) => {
+                if (error) throw error;
+                
+                // 조회 결과 콜백함수에 리턴
+                callback(results);
+            });
+        });
+    }
 }
 
 module.exports = postModel;

@@ -15,6 +15,21 @@ module.exports = {
         postModel.findAllPost(params, (results)=>{
             callback(results);
         });
+    },
+
+    /**
+     * 글 등록
+     * @param {Object} params 
+     * @param {Function} callback 
+     */
+    savePost : (params, callback) => {
+
+        logger.devLog(JSON.stringify(params));
+
+        // 글 등록
+        postModel.savePost(params, (results)=>{
+            callback(results);
+        });
     }
 }
 
