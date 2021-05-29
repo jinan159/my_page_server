@@ -3,10 +3,9 @@ const WrongRequestError = require('./WrongRequestError');
 const ResourceNotExistError = require('./ResourceNotExistError');
 
 module.exports = (err, req, res, next) => {
-    if (err instanceof WrongRequestError) { // 400
-        res.status(err.code).json(err.message);
-    } 
-    else if (err instanceof ResourceNotExistError) { // 404
+    if (err instanceof WrongRequestError ||  // 400
+        err instanceof ResourceNotExistError // 404
+        ) { 
         res.status(err.code).json(err.message);
     }
 
