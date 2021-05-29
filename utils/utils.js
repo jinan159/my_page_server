@@ -6,7 +6,7 @@ module.exports = {
          * @param {Date} date 
          * @returns {String} format에 맞춰 변환된 날짜
          */
-        dateFormatString : (format, date) => {
+        dateFormatString: (format, date) => {
             if (format && typeof format != 'string') return null;
             if (date && typeof date.getDate != 'function') return null;
 

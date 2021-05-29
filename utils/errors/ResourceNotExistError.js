@@ -1,7 +1,7 @@
 /**
- * 잘못된 요청이 들어온 경우 발생하는 error
+ * 요청한 resource가 없는 경우 발생하는 error
  */
-class WrongRequestError extends Error {
+class ResourceNotExistError extends Error {
     /**
      * 
      * @param {String} message 오류 메세지
@@ -11,12 +11,12 @@ class WrongRequestError extends Error {
         super(...params);
 
         if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, WrongRequestError);
+            Error.captureStackTrace(this, ResourceNotExistError);
         }
 
-        this.code = 400;
+        this.code = 404;
         this.message = message;
     }
 }
 
-module.exports = WrongRequestError;
+module.exports = ResourceNotExistError;

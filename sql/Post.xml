@@ -28,7 +28,14 @@
     </if>
   </select>
 
-  <insert id="savePost">
+  <select id="selectPostCount">
+                           SELECT COUNT(*) as count FROM post
+                            WHERE 1 = 1
+    <if test="id != null">    AND id = ${id}</if>
+    <if test="writer != null">AND writer = #{writer}</if>
+  </select>
+
+  <insert id="insertPost">
                   INSERT INTO post (
                                     title
                                   , writer
@@ -47,5 +54,17 @@
                                   , now()
                                   )
   </insert>
-  
+
+  <update id="updatePost">
+                             UPDATE post
+                                SET 
+                                    modified_datetime = now()
+    <if test="title != null">     , title = #{title}</if>
+    <if test="content != null">   , content = #{content}</if>
+    <if test="start_date != null">, start_date = #{start_date}</if>
+    <if test="end_date != null">  , end_date = #{end_date}</if>
+                              WHERE id = ${id}
+
+  </update>
+
 </mapper>

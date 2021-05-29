@@ -5,7 +5,7 @@ module.exports = {
              * 해당 String이 JSON String 인지 여부를 반환한다.
              * @returns 
              */
-            isJsonString : function() {
+            isJsonString: function() {
                 try { 
                     JSON.parse(this); 
                 } 
