@@ -3,15 +3,17 @@
 <mapper namespace="Post">
 
   <select id="findAllPost">
-    SELECT id
-         , title
-         , writer
-         , content
-         , start_date
-         , end_date
-         , write_datetime
-         , modified_datetime
-      FROM post
+    SELECT tbl.* FROM
+    (
+      SELECT id
+           , title
+           , writer
+           , content
+           , start_date
+           , end_date
+           , write_datetime
+           , modified_datetime
+        FROM post
       <choose>
         <when test="sort == 'desc'">
           ORDER BY start_date DESC
@@ -20,29 +22,30 @@
           ORDER BY start_date ASC
         </otherwise>
       </choose>
-      <if test="start > -1 AND count > -1">
+    ) tbl
+    <if test="start > -1 AND count > -1">
         LIMIT ${start}, ${count}
-      </if>
+    </if>
   </select>
 
   <insert id="savePost">
-    INSERT INTO post (
-      title
-    , writer
-    <if test="content != null">, content</if>
+                  INSERT INTO post (
+                                    title
+                                  , writer
+    <if test="content != null">   , content</if>
     <if test="start_date != null">, start_date</if>
-    <if test="end_date != null">, end_date</if>
-    , write_datetime
-    , modified_datetime
-    ) VALUES (
-      #{title}
-    , #{writer}
-    <if test="content != null">, #{content}</if>
+    <if test="end_date != null">  , end_date</if>
+                                  , write_datetime
+                                  , modified_datetime
+                                  ) VALUES (
+                                    #{title}
+                                  , #{writer}
+    <if test="content != null">   , #{content}</if>
     <if test="start_date != null">, #{start_date}</if>
-    <if test="end_date != null">, #{end_date}</if>
-    , now()
-    , now()
-    )
+    <if test="end_date != null">  , #{end_date}</if>
+                                  , now()
+                                  , now()
+                                  )
   </insert>
-
+  
 </mapper>
