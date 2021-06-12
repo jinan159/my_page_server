@@ -32,7 +32,7 @@ module.exports = {
                             MI = MI.length == 1 ? '0' + MI : MI;
                         var SS = String(date.getSeconds());
                             SS = SS.length == 1 ? '0' + SS : SS;
-                        result = result + `${HH}:${MI}:${SS}`;
+                        result = result + ` ${HH}:${MI}:${SS}`;
                     }
                     break;
                 case 'YYYYMMDD':
