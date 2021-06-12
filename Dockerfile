@@ -1,14 +1,13 @@
-FROM node:14.16.1
+FROM node:14.16
 
-CMD ["bash"]
-
-ENV NODE_ENV development
-
-RUN npm install -g pm2 \
-&& mkdir /app
-
-COPY ./ /app
+ENV NODE_ENV dev_remote
 
 EXPOSE 3000
 
-CMD ["node"]
+RUN mkdir /app
+
+WORKDIR /app
+
+COPY ./ /app
+
+RUN npm install
