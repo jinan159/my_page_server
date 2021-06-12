@@ -1,6 +1,6 @@
 const util = require('./utils');
 const LOG = '[LOG]';
-const ERR = '[ERROR]';
+const ERR = '[ERR]';
 const DEV = '[DEV]';
 
 /**
@@ -10,25 +10,24 @@ const DEV = '[DEV]';
 const writeLog = (...options) => {
     let pre = '';
     let now = util.dateUtils.dateFormatString("YYYY-MM-DD HH:MI:SS", new Date());
-    let message = '';
+    let messageArr = [];
     let isError = false;
 
     // pre Text 여부에 따라 메세지 생성
     for(i in options) {
         switch (options[i]) {
-            case LOG: pre += LOG;                 break;
             case ERR: pre += ERR; isError = true; break;
+            case LOG: pre += LOG;                 break;
             case DEV: pre += DEV;                 break;
-            default: message += options[i];       break;
+            default: messageArr.push(options[i]); break;
         }
-        
     }
 
     // 오류가 포함된 경우 error 로깅
     if (isError) {
-        console.error(`${pre} ${now} > ${message}`);
+        console.error(`${pre} ${now} > `, ...messageArr);
     } else {
-        console.log(`${pre} ${now} > ${message}`);
+        console.log(`${pre} ${now} > `, ...messageArr);
     }
 }
 
