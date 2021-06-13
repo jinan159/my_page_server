@@ -2,6 +2,7 @@ const express = require('express');
 const Joi = require('joi');
 const postService = require('../services/postService');
 const WrongRequestError = require('../../utils/errors/WrongRequestError');
+const logger = require('../../utils/logger');
 
 const app = express();
 
@@ -16,7 +17,9 @@ app.get('/', function(req, res, next) {
     });
 
     // 요청 파라미터 validation
-    const req_validation = schema.validate(req.body);
+    const req_validation = schema.validate(req.query);
+
+    logger.devLog("req.query : ", req.query);
 
     // validation 오류
     if (req_validation.error) {        
@@ -24,7 +27,7 @@ app.get('/', function(req, res, next) {
         throw new WrongRequestError(req_validation.error.details[0].message);
     } else {
         // 서비스 호출
-        postService.findAllPost(req.body)
+        postService.findAllPost(req.query)
             .then(
                 (results) => {        
                     res.json(results);
