@@ -2,6 +2,7 @@ const mapper = require('mybatis-mapper');
 const path = require('path');
 const ConnectionPool = require('../../config/connectionPool');
 const logger = require('../../utils/logger');
+const queryModel = require('./queryModel');
 const pool = ConnectionPool.getConnectionPool();
 
 const format = { language: 'sql', indent: ' ' };
@@ -16,25 +17,7 @@ const postModel = {
      * @param {Function} callback 
      */
     findAllPost: (query_params) => {
-        return new Promise((resolve, reject) => {
-            // 쿼리 로드
-            let query = mapper.getStatement('Post', 'findAllPost', query_params, format);
-    
-            // 커넥션풀에서 DB커넥션 가져옴
-            pool.getConnection( (error, connection) => {
-                if (error) reject(error);
-    
-                logger.devLog(query); // [개발] 쿼리 콘솔에 출력
-
-                // 쿼리 실행
-                connection.query(query, (error, results, fields) => {
-                    if (error) reject(error);
-                    
-                    // 조회 결과 콜백함수에 리턴
-                    resolve(results);
-                });
-            });        
-        });
+        return queryModel.queryStatement('Post', 'findAllPost', query_params);
     },
 
     /**
@@ -43,25 +26,7 @@ const postModel = {
      * @returns {Promise}
      */
     selectPostCount: (query_params) => {
-        return new Promise((resolve, reject) => {
-            // 조회 쿼리 로드
-            let query = mapper.getStatement('Post', 'selectPostCount', query_params, format);
-    
-            // 커넥션풀에서 DB커넥션 가져옴
-            pool.getConnection( (error, connection) => {
-                if (error) reject(error);
-    
-                logger.devLog(query); // [개발] 쿼리 콘솔에 출력
-    
-                // 쿼리 실행
-                connection.query(query, (error, results, fields) => {
-                    if (error) reject(error);
-                    
-                    // 조회 결과 콜백함수에 리턴
-                    resolve(results);
-                });
-            });            
-        });
+        return queryModel.queryStatement('Post', 'selectPostCount', query_params);
     },
 
     /**
@@ -70,25 +35,7 @@ const postModel = {
      * @returns {Promise}
      */
      insertPost : (query_params) => {
-        return new Promise((resolve, reject) => {
-            // 쿼리 로드
-            let query = mapper.getStatement('Post', 'insertPost', query_params, format);
-
-            // 커넥션풀에서 DB커넥션 가져옴
-            pool.getConnection( (error, connection) => {
-                if (error) reject(error)
-
-                logger.devLog(query); // [개발] 쿼리 콘솔에 출력
-
-                // 쿼리 실행
-                connection.query(query, (error, results, fields) => {
-                    if (error) reject(error);
-                    
-                    // 조회 결과 콜백함수에 리턴
-                    resolve(results);
-                });
-            });
-        });
+        return queryModel.queryStatement('Post', 'insertPost', query_params);
     },
 
     /**
@@ -97,25 +44,7 @@ const postModel = {
      * @returns {Promise}
      */
     updatePost: (query_params) => {
-        return new Promise((resolve, reject) => {
-            // 쿼리 로드
-            let query = mapper.getStatement('Post', 'updatePost', query_params, format);
-    
-            // 커넥션풀에서 DB커넥션 가져옴
-            pool.getConnection( (error, connection) => {
-                if (error) reject(error);
-    
-                logger.devLog(query); // [개발] 쿼리 콘솔에 출력
-    
-                // 쿼리 실행
-                connection.query(query, (error, results, fields) => {
-                    if (error) reject(error);
-                    
-                    // 조회 결과 콜백함수에 리턴
-                    resolve(results);
-                });
-            });        
-        });
+        return queryModel.queryStatement('Post', 'updatePost', query_params);
     }
 }
 
