@@ -1,13 +1,16 @@
+# mac filesystem stuff
+.Ds_Store
+
+# workspace
+.vscode
+
 # node stuff
 node_modules/
 package-lock.json
-
-# mac filesystem stuff
-.Ds_Store
 
 # configfile
 config/env/development.js
 config/env/production.js
 
-# workspace
-.vscode
+# jest
+coverage

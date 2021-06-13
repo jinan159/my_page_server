@@ -9,7 +9,7 @@ const DEV = '[DEV]';
  */
 const writeLog = (...options) => {
     let pre = '';
-    let now = util.dateUtils.dateFormatString("YYYY-MM-DD HH:MI:SS", new Date());
+    let now = util.dateUtils.getFormattedDateString("YYYY-MM-DD HH:MI:SS", new Date());
     let messageArr = [];
     let isError = false;
 

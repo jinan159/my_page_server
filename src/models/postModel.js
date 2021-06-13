@@ -1,7 +1,8 @@
 const mapper = require('mybatis-mapper');
 const path = require('path');
-const pool = require('../../config/db_connection');
+const ConnectionPool = require('../../config/connectionPool');
 const logger = require('../../utils/logger');
+const pool = ConnectionPool.getConnectionPool();
 
 const format = { language: 'sql', indent: ' ' };
 const mapperPath = path.join(__dirname, '../../sql/Post.xml');
@@ -24,7 +25,7 @@ const postModel = {
                 if (error) reject(error);
     
                 logger.devLog(query); // [개발] 쿼리 콘솔에 출력
-    
+
                 // 쿼리 실행
                 connection.query(query, (error, results, fields) => {
                     if (error) reject(error);

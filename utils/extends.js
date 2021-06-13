@@ -1,4 +1,7 @@
 module.exports = {
+    /**
+     * 기본객체 상속
+     */
     initializeExtends: () => {
         Object.assign(String.prototype, {
             /**
@@ -13,7 +16,7 @@ module.exports = {
                     return false; 
                 }
                 return true;
-            }
+            },
         });
     }
 }
