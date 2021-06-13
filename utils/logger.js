@@ -1,3 +1,4 @@
+const { envUtils } = require('./utils');
 const util = require('./utils');
 const LOG = '[LOG]';
 const ERR = '[ERR]';
@@ -51,7 +52,7 @@ const logger = {
      * @param {any} message 
      */
     devLog : (...message) => {
-        if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'dev_remote') {
+        if (envUtils.isDevEnv()) {
             writeLog(DEV, ...message);
         }
     },
@@ -60,7 +61,7 @@ const logger = {
      * @param {any} message 
      */
      devError : (...message) => {
-        if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'dev_remote') {
+        if (envUtils.isDevEnv()) {
             writeLog(DEV, ERR, ...message);
         }
         
