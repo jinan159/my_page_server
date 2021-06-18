@@ -13,7 +13,9 @@ app.get('/', function(req, res, next) {
     const schema = Joi.object({
         sort : Joi.string().valid('asc', 'desc'),
         start: Joi.number().integer().greater(-1),
-        count: Joi.number().integer().greater(-1)
+        count: Joi.number().integer().greater(-1),
+        s_date: Joi.date(),
+        e_date: Joi.date()
     });
 
     // 요청 파라미터 validation

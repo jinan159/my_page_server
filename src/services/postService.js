@@ -8,22 +8,34 @@ module.exports = {
      * @param {Object} params       조회를 위한 파라미터들
      * @returns {Promise} 
      */
-    findAllPost: (params) => {
-        return new Promise((resolve, reject) => {
-            logger.devLog(JSON.stringify(params));
+    findAllPost: async (params) => {
+        logger.devLog("[Service]", JSON.stringify(params));
+        var result = null;
+        var cnt = null;
+        try {
+            result = await postModel.findAllPost(params);
+            cnt = await postModel.selectPostCount(params);
+        } catch (error) {
+            throw error;
+        } finally {
+            return {result, cnt};
+        }   
+
+        // return new Promise((resolve, reject) => {
+            
     
-            // 전체 글 목록 조회
-            postModel.findAllPost(params)
-                .then(
-                    (results) => {
-                        resolve(results);
-                    },
-                    (rejected) => {
-                        reject(rejected);
-                    }
-                )
-                .catch(err => {reject(err)});
-        });
+        //     // 전체 글 목록 조회
+        //     postModel.findAllPost(params)
+        //         .then(
+        //             (results) => {
+        //                 resolve(results);
+        //             },
+        //             (rejected) => {
+        //                 reject(rejected);
+        //             }
+        //         )
+        //         .catch(err => {reject(err)});
+        // });
 
     },
 

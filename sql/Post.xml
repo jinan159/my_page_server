@@ -14,6 +14,13 @@
            , write_datetime
            , modified_datetime
         FROM post
+       WHERE 1=1
+       <if test="s_date != null">
+        AND start_date <![CDATA[ >= ]]> #{s_date}
+       </if>
+       <if test="e_date != null">
+         AND start_date <![CDATA[ <= ]]> #{e_date}
+       </if>
       <choose>
         <when test="sort == 'desc'">
           ORDER BY start_date DESC
@@ -31,6 +38,20 @@
   <select id="selectPostCount">
                            SELECT COUNT(*) as count FROM post
                             WHERE 1 = 1
+                            <if test="s_date != null">
+                              AND start_date <![CDATA[ >= ]]> #{s_date}
+                            </if>
+                            <if test="e_date != null">
+                              AND start_date <![CDATA[ <= ]]> #{e_date}
+                            </if>
+                            <choose>
+                              <when test="sort == 'desc'">
+                                ORDER BY start_date DESC
+                              </when>
+                              <otherwise>
+                                ORDER BY start_date ASC
+                              </otherwise>
+                            </choose>
     <if test="id != null">    AND id = ${id}</if>
     <if test="writer != null">AND writer = #{writer}</if>
   </select>

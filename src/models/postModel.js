@@ -17,6 +17,7 @@ const postModel = {
      * @param {Function} callback 
      */
     findAllPost: (query_params) => {
+        logger.devLog('asdfasdfasdf');
         return queryModel.queryStatement('Post', 'findAllPost', query_params);
     },
 

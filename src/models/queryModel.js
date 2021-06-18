@@ -18,6 +18,8 @@ const queryModel = {
      * @returns {Promise}
      */
      queryStatement: (namespace, sql_name, query_params) => {
+        logger.devLog(`[Model.${namespace}.${sql_name}]`, JSON.stringify(query_params));
+
         return new Promise((resolve, reject) => {
             // 쿼리 로드
             let query = mapper.getStatement(namespace, sql_name, query_params, format);
