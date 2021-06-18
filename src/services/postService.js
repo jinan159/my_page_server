@@ -10,15 +10,15 @@ module.exports = {
      */
     findAllPost: async (params) => {
         logger.devLog("[Service]", JSON.stringify(params));
-        var result = null;
+        var page = null;
         var cnt = null;
         try {
-            result = await postModel.findAllPost(params);
+            page = await postModel.findAllPost(params);
             cnt = await postModel.selectPostCount(params);
         } catch (error) {
             throw error;
         } finally {
-            return {result, cnt};
+            return {page, cnt};
         }   
 
         // return new Promise((resolve, reject) => {

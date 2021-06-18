@@ -35,7 +35,7 @@ const queryModel = {
                 connection.query(query, (error, result, fields) => {
                     if (error) reject(error);
 
-                    resolve(result);
+                    resolve({result: result});
                 });
 
                 // 연결 반환
